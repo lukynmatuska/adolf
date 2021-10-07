@@ -124,6 +124,7 @@ client.once('ready', () => {
 
 
 client.on('message', message => {
+  console.log(message);
   if (message.author.bot) return;
   if (!message.content.startsWith(CONFIG.prefix)) return;
   const m = message.content.toLowerCase()
