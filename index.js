@@ -12,6 +12,10 @@ const moment = require('moment')
 moment.locale('cs')
 const musicController = require('./controllers/music')
 const queue = new Map();
+const CONFIG = {
+  prefix: process.env.PREFIX,
+
+};
 
 function sendMessageToChannel(channel) {
   client.channels.cache.forEach(ch => {
@@ -121,20 +125,20 @@ client.once('ready', () => {
 
 client.on('message', message => {
   if (message.author.bot) return;
-  if (!message.content.startsWith(config.prefix)) return;
+  if (!message.content.startsWith(CONFIG.prefix)) return;
   const m = message.content.toLowerCase()
   const serverQueue = queue.get(message.guild.id);
-  if (m === `${config.prefix}ping`) {
+  if (m === `${CONFIG.prefix}ping`) {
     message.channel.send('Pong.')
-  } else if (m === `${config.prefix}help` || m === `${config.prefix}commands`) {
-    message.channel.send(`${config.prefix}ping\n${config.prefix}server\n${config.prefix}help\n${config.prefix}commands`)
-  } else if (m === `${config.prefix}server`) {
+  } else if (m === `${CONFIG.prefix}help` || m === `${CONFIG.prefix}commands`) {
+    message.channel.send(`${CONFIG.prefix}ping\n${CONFIG.prefix}server\n${CONFIG.prefix}help\n${CONFIG.prefix}commands`)
+  } else if (m === `${CONFIG.prefix}server`) {
     message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`)
-  } else if (message.content.startsWith(`${config.prefix}play`)) {
+  } else if (message.content.startsWith(`${CONFIG.prefix}play`)) {
     musicController.execute(message, serverQueue)
-  } else if (message.content.startsWith(`${config.prefix}skip`)) {
+  } else if (message.content.startsWith(`${CONFIG.prefix}skip`)) {
     musicController.skip(message, serverQueue)
-  } else if (message.content.startsWith(`${config.prefix}stop`)) {
+  } else if (message.content.startsWith(`${CONFIG.prefix}stop`)) {
     musicController.stop(message, serverQueue)
   }
 })
