@@ -106,3 +106,4 @@ dist
 .env
 pm2.config.js
 images/
+.docker-compse.yml
