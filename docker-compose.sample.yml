@@ -1,0 +1,18 @@
+version: "3.5"
+services:
+  bot:
+    image: ghcr.io/lukynmatuska/adolf:latest
+    restart: always
+    environment:
+      DISCORD_TOKEN: TOKEN
+      DISCORD_GUILD: ID
+      DISCORD_CHANNEL: ID
+      BOT_ACTIVITY_OPTION_TYPE: LISTENING
+      BOT_ACTIVITY_NAME: somthing
+      PREFIX: !
+      UTC_LOCATION: Europe/Prague
+      CRON_JOB_TIMING: 0 0 * * *
+      DIR_NAME: images
+#      NODEMAILER_TRANSPORT: '{"host": "", "port": 465, "secure": true, "auth": {"user": "user@user.net", "pass": "pass"}}'
+    stdin_open: true  # -i
+    tty: true         # -t
